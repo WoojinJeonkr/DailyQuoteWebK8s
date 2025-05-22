@@ -1,0 +1,53 @@
+# Python specific ignores
+*.pyc
+__pycache__/
+.pytest_cache/
+venv/
+.env
+
+# Java / Spring Boot specific ignores
+.gradle/
+.idea/             # IntelliJ IDEA project files
+.vscode/           # VS Code project files
+build/             # Gradle build output directory
+target/            # Maven build output directory
+*.iml              # IntelliJ IDEA module files
+*.ipr
+*.iws
+.project           # Eclipse project files
+.classpath
+.settings/         # Eclipse project settings
+tmp/
+
+# Operating System specific ignores
+.DS_Store          # macOS
+Thumbs.db          # Windows
+*.log
+*.swp
+*~
+
+# Docker specific ignores
+# Docker 이미지를 빌드하는 Dockerfile이 각 서비스 폴더에 있으므로,
+# 여기서는 각 서비스 폴더 내의 .dockerignore가 더 중요합니다.
+# 하지만 간혹 최상위에서 관리할 것도 있을 수 있습니다.
+# 예를 들어, 로컬 Docker volume mount용 더미 데이터 폴더 등.
+
+# Kubernetes related (optional, if you manage secrets/configs directly)
+# k8s/secrets.yaml # 비밀 정보가 담긴 YAML 파일은 Git에 올리지 않음
+# k8s/configmap.yaml # 민감한 설정이 있다면 제외
+
+# IDE-specific files (common for many IDEs)
+.directory
+.project
+.settings/
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Miscellaneous
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.bak
