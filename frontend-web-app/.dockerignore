@@ -1,0 +1,14 @@
+# frontend-web-app/.dockerignore
+.gradle/
+build/
+target/
+.mvn/
+.idea/
+*.iml
+*.log
+!gradlew
+!gradlew.bat
+.project
+.classpath
+.settings
+tmp/
