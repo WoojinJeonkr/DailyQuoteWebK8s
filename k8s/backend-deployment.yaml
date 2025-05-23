@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: daily-quote-api-deployment
+  labels:
+    app: daily-quote-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: daily-quote-api
+  template:
+    metadata:
+      labels:
+        app: daily-quote-api
+    spec:
+      containers:
+        - name: daily-quote-api
+          image: woojin0412/daily-quote-api:latest
+          ports:
+            - containerPort: 5000
+          resources:
+            requests:
+              memory: '64Mi'
+              cpu: '50m'
+            limits:
+              memory: '128Mi'
+              cpu: '100m'

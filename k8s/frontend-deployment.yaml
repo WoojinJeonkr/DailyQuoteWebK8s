@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: daily-quote-web-deployment
+  labels:
+    app: daily-quote-web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: daily-quote-web
+  template:
+    metadata:
+      labels:
+        app: daily-quote-web
+    spec:
+      containers:
+        - name: daily-quote-web
+          image: woojin0412/daily-quote-web:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: '128Mi'
+              cpu: '100m'
+            limits:
+              memory: '256Mi'
+              cpu: '200m'
