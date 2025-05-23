@@ -19,7 +19,7 @@ target/            # Maven build output directory
 .settings/         # Eclipse project settings
 tmp/
 *.class
-/build/
+build/
 /bin/
 
 # Operating System specific ignores
