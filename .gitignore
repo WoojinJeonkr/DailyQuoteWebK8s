@@ -20,7 +20,7 @@ target/            # Maven build output directory
 tmp/
 *.class
 build/
-/bin/
+bin/
 
 # Operating System specific ignores
 .DS_Store          # macOS
