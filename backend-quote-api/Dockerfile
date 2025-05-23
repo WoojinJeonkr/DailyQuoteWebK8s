@@ -19,6 +19,12 @@ WORKDIR /app
 # 빌더 스테이지에서 설치된 의존성 복사
 COPY --from=builder /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
 
+# /usr/local/bin (gunicorn과 같은 실행 파일) 복사
+COPY --from=builder /usr/local/bin /usr/local/bin
+
+# 애플리케이션 코드 복사 (app.py 등)
+COPY . .
+
 # Gunicorn을 사용하여 Flask 앱 실행
 # 0.0.0.0은 모든 네트워크 인터페이스에서 접근 가능하도록 합니다.
 # --bind 0.0.0.0:5000은 5000번 포트로 바인딩합니다.
