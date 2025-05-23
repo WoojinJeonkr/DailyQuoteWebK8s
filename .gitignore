@@ -18,6 +18,9 @@ target/            # Maven build output directory
 .classpath
 .settings/         # Eclipse project settings
 tmp/
+*.class
+/build/
+/bin/
 
 # Operating System specific ignores
 .DS_Store          # macOS
