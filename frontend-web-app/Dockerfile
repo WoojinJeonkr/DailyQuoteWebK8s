@@ -8,6 +8,9 @@ WORKDIR /app
 
 # Gradle Wrapper 복사 (필요시)
 COPY gradlew .
+
+RUN chmod +x gradlew
+
 COPY gradle gradle
 
 # build.gradle 및 settings.gradle 복사 (의존성 캐싱 활용)
