@@ -18,7 +18,7 @@ spec:
         - name: daily-quote-web
           image: woojin0412/daily-quote-web:1.0
           ports:
-            - containerPort: 8081
+            - containerPort: 8080
           resources:
             requests:
               memory: '128Mi'
