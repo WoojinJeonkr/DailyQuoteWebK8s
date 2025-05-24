@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: daily-quote-api
-          image: woojin0412/daily-quote-api:latest
+          image: woojin0412/daily-quote-api:1.0
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
