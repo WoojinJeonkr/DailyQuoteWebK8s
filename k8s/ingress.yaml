@@ -3,23 +3,26 @@ kind: Ingress
 metadata:
   name: daily-quote-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    ingress.kubernetes.io/ssl-redirect: 'false'
 spec:
-  ingress.class: nginx
+  ingressClassName: nginx
   rules:
-    - http:
+    - host: my-nginx.192.168.56.61.sslip.io
+      http:
         paths:
-          - path: /api/(.*)
+          - path: /api/(quote|health)(.*)
             pathType: Prefix
             backend:
               service:
                 name: daily-quote-api-service
                 port:
                   number: 5000
-          - path: /
+          - path: /(.*)
             pathType: Prefix
             backend:
               service:
                 name: daily-quote-web-service
                 port:
-                  number: 80
+                  number: 8081
