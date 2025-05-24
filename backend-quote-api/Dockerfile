@@ -10,6 +10,13 @@ COPY requirements.txt .
 # 파이썬 의존성 설치
 RUN pip install --no-cache-dir -r requirements.txt
 
+# 애플리케이션 코드 복사 (quote_fetcher.py, app.py 등)
+COPY . .
+
+# quote_fetcher.py를 실행하여 quotes.json을 생성 (빌드 시점)
+# 이렇게 하면 런타임에 quote_fetcher.py를 다시 실행할 필요가 없습니다.
+RUN python quote_fetcher.py
+
 # 2단계: 최종 이미지 스테이지
 FROM python:3.9-slim-buster
 
@@ -22,12 +29,12 @@ COPY --from=builder /usr/local/lib/python3.9/site-packages /usr/local/lib/python
 # /usr/local/bin (gunicorn과 같은 실행 파일) 복사
 COPY --from=builder /usr/local/bin /usr/local/bin
 
-# 애플리케이션 코드 복사 (app.py 등)
-COPY . .
+# 애플리케이션 코드 복사 (app.py) 및 생성된 quotes.json 복사
+# quotes.json도 이 단계에서 복사되어야 합니다.
+COPY --from=builder /app/app.py /app/app.py
+COPY --from=builder /app/quotes.json /app/quotes.json
 
 # Gunicorn을 사용하여 Flask 앱 실행
-# 0.0.0.0은 모든 네트워크 인터페이스에서 접근 가능하도록 합니다.
-# --bind 0.0.0.0:5000은 5000번 포트로 바인딩합니다.
 # app:app은 app.py 파일 내의 Flask 애플리케이션 인스턴스 이름이 'app'임을 나타냅니다.
 CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
 
