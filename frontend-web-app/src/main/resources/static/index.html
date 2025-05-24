@@ -40,8 +40,8 @@
 				border: none;
 				padding: 12px 25px;
 				border-radius: 5px;
-				cursor: pointer;
 				font-size: 1em;
+				cursor: pointer;
 				transition: background-color 0.3s ease;
 			}
 			button:hover {
@@ -62,9 +62,10 @@
 		</div>
 
 		<script>
-			// Kubernetes Ingress를 통해 /api 경로로 Flask 백엔드 API가 노출될 것을 가정합니다.
-			// 만약 Ingress 없이 NodePort 등으로 직접 접근한다면, 여기에 Flask API의 실제 주소를 입력해야 합니다.
-			const API_BASE_URL = '/api'; // 또는 'http://your-flask-api-external-ip:port' (NodePort 시)
+			// Flask 백엔드 API의 /api 경로가 Ingress 또는 다른 프록시를 통해 노출될 것을 가정합니다.
+			// Spring Boot의 WebController가 '/api/quote'를 받아서 다시 Flask '/api/quote'로 프록시하므로,
+			// 여기서는 스프링 부트 프론트엔드의 '/api' 엔드포인트를 호출합니다.
+			const API_BASE_URL = '/api';
 
 			async function fetchQuote() {
 				const quoteDisplay = document.getElementById('quoteDisplay');
@@ -73,7 +74,7 @@
 				errorMessage.textContent = '';
 
 				try {
-					// Flask API의 /quote 엔드포인트를 호출
+					// Spring Boot 컨트롤러의 /api/quote 엔드포인트를 호출 (이것이 다시 Flask로 프록시함)
 					const response = await fetch(`${API_BASE_URL}/quote`);
 					if (!response.ok) {
 						throw new Error(`HTTP error! Status: ${response.status}`);

@@ -18,12 +18,27 @@ public class WebController {
     @ResponseBody
     public String getRandomQuote() {
         RestTemplate restTemplate = new RestTemplate();
-        String backendUrl = backendApiBaseUrl + "/quote";
+        // 백엔드 Flask 앱의 실제 /api/quote 엔드포인트를 호출하도록 수정합니다.
+        String backendUrl = backendApiBaseUrl + "/api/quote";
         try {
             return restTemplate.getForObject(backendUrl, String.class);
         } catch (Exception e) {
             e.printStackTrace();
             return "{\"quote\": \"Error fetching quote from backend.\"}" ;
+        }
+    }
+
+    // 백엔드 헬스 체크 엔드포인트
+    @GetMapping("/api/health")
+    @ResponseBody
+    public String getHealthStatus() {
+        RestTemplate restTemplate = new RestTemplate();
+        String backendUrl = backendApiBaseUrl + "/api/health";
+        try {
+            return restTemplate.getForObject(backendUrl, String.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "{\"status\": \"Error fetching health from backend.\"}" ;
         }
     }
 }
